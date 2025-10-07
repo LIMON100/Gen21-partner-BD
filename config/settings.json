@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "data": {
+    "app_name": "Gen21",
+    "enable_stripe": "1",
+    "default_tax": "10",
+    "default_currency": "$",
+    "fcm_key": "AAAAn1M4PgE:APA91bFpnDYezVUYNtL8QEyREVQxfb2CQbSQsYQnG_HrxfMO-Ddp3XaSLRoSsj9Rmg9OxsMx03oclwfkVbM77D799TmNWaz6bAg26fYloADuaP1XaqKY_wmhf3DPxTP10axDotgWTsg5",
+    "enable_paypal": "1",
+    "main_color": "#F4841F",
+    "main_dark_color": "#F4841F",
+    "second_color": "#08143A",
+    "second_dark_color": "#CCCCDD",
+    "accent_color": "#8C9DA8",
+    "accent_dark_color": "#9999AA",
+    "scaffold_dark_color": "#2C2C2C",
+    "scaffold_color": "#FAFAFA",
+    "google_maps_key": "AIzaSyB9_kZ0_EYZoBd6EHg-7ETJkjJErj-VaEI",
+    "mobile_language": "en",
+    "app_version": "1.0.0",
+    "enable_version": "1",
+    "default_currency_decimal_digits": "2",
+    "currency_right": "1",
+    "distance_unit": "km",
+    "default_theme": "light",
+    "provider_app_name": "Service Partner",
+    "enable_razorpay": "1"
+  },
+  "message": "Settings retrieved successfully"
+}

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "86080780408",
+    "project_id": "gen21au",
+    "storage_bucket": "gen21au.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86080780408:android:5aefaf95ce322617d6558d",
+        "android_client_info": {
+          "package_name": "com.gen21.on_demand_service_partner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWDRYgXdJNjLfghnDbiFxN3TVjpFQCbsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86080780408:android:a24740f933925f96d6558d",
+        "android_client_info": {
+          "package_name": "com.gen21.on_demand_service_user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWDRYgXdJNjLfghnDbiFxN3TVjpFQCbsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

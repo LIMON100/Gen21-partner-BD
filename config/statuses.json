@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "status": "Received",
+      "order": "1"
+    },
+    {
+      "id": 4,
+      "status": "Accepted",
+      "order": "10"
+    },
+    {
+      "id": 3,
+      "status": "On the Way",
+      "order": "20"
+    },
+    {
+      "id": 5,
+      "status": "Ready",
+      "order": "30"
+    },
+    {
+      "id": 2,
+      "status": "In Progress",
+      "order": "40"
+    },
+    {
+      "id": 6,
+      "status": "Done",
+      "order": "50"
+    },
+    {
+      "id": 7,
+      "status": "Failed",
+      "order": "60"
+    }
+  ],
+  "message": "Booking Statuses retrieved successfully"
+}

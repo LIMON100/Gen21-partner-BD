@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "title": "Privacy Policy"
+    },
+    {
+      "id": 2,
+      "title": "Terms & Conditions"
+    }
+  ],
+  "message": "Custom Pages retrieved successfully"
+}
