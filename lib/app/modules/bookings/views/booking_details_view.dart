@@ -137,25 +137,26 @@ class BookingDetailsView extends GetView<BookingControllerNew> {
                                       ],
                                     ),
                                     hasDivider: true),
-                                BookingRowWidget(
-                                    description: "Payment Status".tr,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.only(right: 12, left: 12, top: 6, bottom: 6),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                                            color: Get.theme.focusColor.withOpacity(0.1),
-                                          ),
-                                          child: Text(
-                                            controller.booking.value.payment?.paymentStatus?.status ?? "Not Paid".tr,
-                                            style: TextStyle(color: Get.theme.hintColor),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    hasDivider: true),
+                                // BookingRowWidget(
+                                //     description: "Payment Status".tr,
+                                //     child: Row(
+                                //       mainAxisAlignment: MainAxisAlignment.end,
+                                //       children: [
+                                //         Container(
+                                //           padding: const EdgeInsets.only(right: 12, left: 12, top: 6, bottom: 6),
+                                //           decoration: BoxDecoration(
+                                //             borderRadius: BorderRadius.all(Radius.circular(5)),
+                                //             color: Get.theme.focusColor.withOpacity(0.1),
+                                //           ),
+                                //           child: Text(
+                                //             controller.booking.value.payment?.paymentStatus?.status ?? "Not Paid".tr,
+                                //             style: TextStyle(color: Get.theme.hintColor),
+                                //           ),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //     hasDivider: true
+                                // ),
                                 if (controller.booking.value.payment?.paymentMethod != null)
                                   BookingRowWidget(
                                       description: "Payment Method".tr,

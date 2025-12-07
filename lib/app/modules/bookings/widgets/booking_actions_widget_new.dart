@@ -36,9 +36,7 @@ class BookingActionsWidgetNew extends GetView<BookingControllerNew> {
           mainAxisAlignment: MainAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
           children: [
-            _booking.value.payment != null &&
-                    (_booking.value.payment.paymentStatus?.id ?? '') == '2'
-                ? Column(
+             Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -46,18 +44,13 @@ class BookingActionsWidgetNew extends GetView<BookingControllerNew> {
                               (_booking.value.payment.paymentStatus?.id ??
                                       '') ==
                                   '2'
-                          // ? Text(
-                          //     "Booking Paid Successfully".tr,
-                          //     textAlign: TextAlign.center,
-                          //     style: Get.textTheme.bodyText1,
-                          //   )
                           ?Text(
                           "",
                           textAlign: TextAlign.center,
                           style: Get.textTheme.bodyText1,
                         )
                           : Text(
-                              "Waiting for Payment".tr,
+                              "".tr,
                               textAlign: TextAlign.center,
                               style: Get.textTheme.bodyText1,
                             ),
@@ -150,13 +143,6 @@ class BookingActionsWidgetNew extends GetView<BookingControllerNew> {
                                     .global
                                     .value
                                     .inProgress)
-                          // Expanded(
-                          //   child: Text(
-                          //     "Waiting for Confirmation from Customer".tr,
-                          //     textAlign: TextAlign.center,
-                          //     style: Get.textTheme.bodyText1,
-                          //   ),
-                          // ),
                           Expanded(
                             child: Text(
                               "",
@@ -172,30 +158,6 @@ class BookingActionsWidgetNew extends GetView<BookingControllerNew> {
                               style: Get.textTheme.bodyText1,
                             ),
                           ),
-                        // if (_booking.value.booking_status_id != "7" && _booking.value.status.order >= Get.find<GlobalService>().global.value.done && _booking.value.payment == null)
-                        //   Expanded(
-                        //     child: Text(
-                        //       "Waiting for Payment".tr,
-                        //       textAlign: TextAlign.center,
-                        //       style: Get.textTheme.bodyText1,
-                        //     ),
-                        //   ),
-                        // if (_booking.value.cancel)
-                        //   Expanded(
-                        //     child: Text(
-                        //       "Booking Canceled".tr,
-                        //       textAlign: TextAlign.center,
-                        //       style: Get.textTheme.bodyText1,
-                        //     ),
-                        //   ),
-                        // if (_booking.value.payment != null && (_booking.value.payment.paymentStatus?.id ?? '') == '2')
-                        //   Expanded(
-                        //     child: Text(
-                        //       "Booking Paid Successfully".tr,
-                        //       textAlign: TextAlign.center,
-                        //       style: Get.textTheme.bodyText1,
-                        //     ),
-                        //   ),
 
                         if (_booking.value.status.order >=
                                 Get.find<GlobalService>().global.value.done &&
@@ -231,28 +193,16 @@ class BookingActionsWidgetNew extends GetView<BookingControllerNew> {
                                 }),
                           ),
                         SizedBox(width: 10),
-                        // if (!_booking.value.cancel && _booking.value.status.order < Get.find<GlobalService>().global.value.onTheWay)
-                        //   MaterialButton(
-                        //     elevation: 0,
-                        //     onPressed: () {
-                        //       controller.declineBookingServiceNew();
-                        //     },
-                        //     padding: EdgeInsets.symmetric(
-                        //         horizontal: 25, vertical: 12),
-                        //     shape: RoundedRectangleBorder(
-                        //         borderRadius: BorderRadius.circular(10)),
-                        //     color: Get.theme.hintColor.withOpacity(0.1),
-                        //     child: Text("Cancel".tr,
-                        //         style: Get.textTheme.bodyText2),
-                        //   ),
+
                       ]).paddingSymmetric(vertical: 10, horizontal: 20),
                     ],
                   )
-                : Text(
-                    "Waiting for Payment".tr,
-                    textAlign: TextAlign.center,
-                    style: Get.textTheme.bodyText1,
-                  ),
+              //   : Text(
+              //       // "Waiting for Payment".tr,
+              // _booking.value.payment.toString(),
+              //       textAlign: TextAlign.center,
+              //       style: Get.textTheme.bodyText1,
+              //     ),
           ],
         ),
       );

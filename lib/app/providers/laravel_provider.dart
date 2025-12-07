@@ -135,7 +135,7 @@ class LaravelApiClient extends GetxService with ApiClient {
       data: json.encode(user.toJson()),
       options: _optionsNetwork,
     );
-    print("RESPONSE DATAL:  $response");
+    print("RESPONSE DATA:  $response");
     if (response.data['success'] == true) {
       response.data['data']['auth'] = true;
       printWrapped("gen_log response.data: ${response.data}");
@@ -752,6 +752,9 @@ class LaravelApiClient extends GetxService with ApiClient {
     Uri _uri = getApiBaseUri("bookings").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
     var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
+
+    print("BOOKING");
+    print(response);
     if (response.data['success'] == true) {
       return response.data['data'].map<BookingModelNew.BookingNew>((obj) => BookingModelNew.BookingNew.fromJson(obj)).toList();
     } else {
@@ -813,6 +816,9 @@ class LaravelApiClient extends GetxService with ApiClient {
     Uri _uri = getApiBaseUri("bookings/${bookingId}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
     var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
+    print("BOOKING DATA");
+    print(response);
+
     if (response.data['success'] == true) {
       return BookingModelNew.BookingNew.fromJson(response.data['data']);
     } else {
@@ -893,9 +899,36 @@ class LaravelApiClient extends GetxService with ApiClient {
     }
   }
 
+  // Future<List<Notification>> getNotifications() async {
+  //   if (!authService.isAuth) {
+  //     throw new Exception("You don't have the permission to access to this area!".tr + "[ getNotifications() ]");
+  //   }
+  //   var _queryParameters = {
+  //     'search': 'notifiable_id:${authService.user.value.id}',
+  //     'searchFields': 'notifiable_id:=',
+  //     'searchJoin': 'and',
+  //     'orderBy': 'created_at',
+  //     'sortedBy': 'desc',
+  //     'limit': '50',
+  //     'only': 'id;type;data;read_at;created_at',
+  //     'api_token': authService.apiToken,
+  //     'version': '2'
+  //   };
+  //   Uri _uri = getApiBaseUri("notifications").replace(queryParameters: _queryParameters);
+  //   printUri(StackTrace.current, _uri);
+  //   print("ndjkfnjka _queryParameters ${_queryParameters.toString()}");
+  //   var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
+  //   print("NOTIFICATION STATUS: $_uri");
+  //   print("ndjkfnjka response ${response.toString()}");
+  //
+  //   return response.data.map<Notification>((obj) => Notification.fromJson(obj)).toList();
+  // }
+
+  // In LaravelApiClient.dart
+
   Future<List<Notification>> getNotifications() async {
     if (!authService.isAuth) {
-      throw new Exception("You don't have the permission to access to this area!".tr + "[ getNotifications() ]");
+      throw Exception("You don't have the permission to access to this area!".tr + "[ getNotifications() ]");
     }
     var _queryParameters = {
       'search': 'notifiable_id:${authService.user.value.id}',
@@ -909,12 +942,23 @@ class LaravelApiClient extends GetxService with ApiClient {
       'version': '2'
     };
     Uri _uri = getApiBaseUri("notifications").replace(queryParameters: _queryParameters);
-    printUri(StackTrace.current, _uri);
-    print("ndjkfnjka _queryParameters ${_queryParameters.toString()}");
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    print("ndjkfnjka response ${response.toString()}");
+    Get.log(_uri.toString());
+    printWrapped("sjdnfjsajk ${_uri.toString()}");
 
-    return response.data.map<Notification>((obj) => Notification.fromJson(obj)).toList();
+    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
+    printWrapped("sjdnfjsajk ${response.toString()}");
+
+    // Check the response status and data structure
+    if (response.statusCode == 200 && response.data['success'] == true) {
+      // 1. Access the 'data' key, which holds the list
+      List<dynamic> notificationList = response.data['data'];
+
+      // 2. Now, call .map() on the list
+      return notificationList.map<Notification>((obj) => Notification.fromJson(obj)).toList();
+    } else {
+      print("kdsjknfsdjk exception happen in getNotifications()");
+      throw Exception(response.data['message'] ?? 'Failed to get notifications');
+    }
   }
 
   Future<Notification> markAsReadNotification(Notification notification) async {

@@ -1125,33 +1125,33 @@ class RegisterView extends GetView<AuthController> {
               SizedBox(height: 20), // Spacing after policy
 
               // 2. Display the "Agreement" heading in RED and BOLD
-              Text(
-                "Agreement".tr, // Just the heading word
-                style: Get.textTheme.titleMedium?.copyWith( // Use a slightly larger style for heading
-                  color: Colors.red, // <<<--- SET COLOR TO RED
-                  fontWeight: FontWeight.bold,
-                ) ?? TextStyle(
-                    fontSize: 14, // Example fallback size
-                    color: Colors.red, // <<<--- SET COLOR TO RED
-                    fontWeight: FontWeight.bold
-                ),
-              ),
-
-              SizedBox(height: 8), // Add a small space below the heading
-
-              // 3. Display the Agreement Points Text (already bold from previous step)
-              Text(
-                agreementPointsText.tr, // The points without the heading
-                style: Get.textTheme.bodyMedium?.copyWith(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold // Keep points bold
-                ) ?? TextStyle(
-                    fontSize: 12,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.bold // Keep points bold
-                ),
-                softWrap: true,
-              ),
+              // Text(
+              //   "Agreement".tr, // Just the heading word
+              //   style: Get.textTheme.titleMedium?.copyWith( // Use a slightly larger style for heading
+              //     color: Colors.red, // <<<--- SET COLOR TO RED
+              //     fontWeight: FontWeight.bold,
+              //   ) ?? TextStyle(
+              //       fontSize: 14, // Example fallback size
+              //       color: Colors.red, // <<<--- SET COLOR TO RED
+              //       fontWeight: FontWeight.bold
+              //   ),
+              // ),
+              //
+              // SizedBox(height: 8), // Add a small space below the heading
+              //
+              // // 3. Display the Agreement Points Text (already bold from previous step)
+              // Text(
+              //   agreementPointsText.tr, // The points without the heading
+              //   style: Get.textTheme.bodyMedium?.copyWith(
+              //       fontSize: 12,
+              //       fontWeight: FontWeight.bold // Keep points bold
+              //   ) ?? TextStyle(
+              //       fontSize: 12,
+              //       color: Colors.black87,
+              //       fontWeight: FontWeight.bold // Keep points bold
+              //   ),
+              //   softWrap: true,
+              // ),
 
               SizedBox(height: 20), // Spacing after agreement points
 
@@ -1274,7 +1274,7 @@ class RegisterView extends GetView<AuthController> {
     _policyError.value = "";
     try {
       final response = await http.get(
-        Uri.parse('https://app.gen21.com.au/api/custom_pages/1'),
+        Uri.parse('https://app.gen21.com.au/api/custom_pages/slug/privacy-policy?version=2'),
         headers: {
           'Accept': 'application/json',
         },
