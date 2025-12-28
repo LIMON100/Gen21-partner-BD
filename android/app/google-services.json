@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "86080780408",
-    "project_id": "gen21au",
-    "storage_bucket": "gen21au.appspot.com"
+    "project_number": "144762403175",
+    "project_id": "gen21bd",
+    "storage_bucket": "gen21bd.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:86080780408:android:5aefaf95ce322617d6558d",
+        "mobilesdk_app_id": "1:144762403175:android:609db3ef4507fabaa9d7c2",
         "android_client_info": {
-          "package_name": "com.gen21.on_demand_service_partner"
+          "package_name": "com.gen21.on_demand_service_partner_bd"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCWDRYgXdJNjLfghnDbiFxN3TVjpFQCbsc"
+          "current_key": "AIzaSyCGwh03yvxeBEwysm6ChoLHVP-cP2TYP6g"
         }
       ],
       "services": {
@@ -26,15 +26,15 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:86080780408:android:a24740f933925f96d6558d",
+        "mobilesdk_app_id": "1:144762403175:android:8c07fa0cb5a26227a9d7c2",
         "android_client_info": {
-          "package_name": "com.gen21.on_demand_service_user"
+          "package_name": "com.gen21.on_demand_service_user_bd"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCWDRYgXdJNjLfghnDbiFxN3TVjpFQCbsc"
+          "current_key": "AIzaSyCGwh03yvxeBEwysm6ChoLHVP-cP2TYP6g"
         }
       ],
       "services": {

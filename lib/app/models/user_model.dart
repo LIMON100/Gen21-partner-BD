@@ -19,11 +19,12 @@ class User extends Model {
   String bio;
   bool auth;
   String countryCode;
+  String otpCode;
   List<dynamic> eProviders;
 
 
 
-  User({this.id, this.name, this.email, this.password, this.apiToken, this.deviceToken, this.phoneNumber, this.verifiedPhone, this.verificationId, this.address, this.bio, this.avatar, this.countryCode});
+  User({this.id, this.name, this.email, this.password, this.apiToken, this.deviceToken, this.phoneNumber, this.verifiedPhone, this.verificationId, this.address, this.bio, this.avatar, this.countryCode, this.otpCode});
 
   User.fromJson(Map<String, dynamic> json) {
     print("sjdnfjksa jsonUser data: ${json.toString()}");
@@ -35,6 +36,7 @@ class User extends Model {
     deviceToken = stringFromJson(json, 'device_token');
     phoneNumber = stringFromJson(json, 'phone_number');
     print("sjdnfjksa phoneNumber $phoneNumber");
+
     if (phoneNumber != null && (phoneNumber.startsWith(countryCodeAu) || phoneNumber.startsWith(countryCodeBd))) {
       countryCode = phoneNumber.substring(0, 3);
       phoneNumber = phoneNumber.substring(3, phoneNumber.length);
@@ -47,6 +49,9 @@ class User extends Model {
     verifiedPhone = boolFromJson(json, 'phone_verified_at');
     avatar = mediaFromJson(json, 'avatar');
     auth = boolFromJson(json, 'auth');
+
+    otpCode = json['otp_code']?.toString();
+
     try {
       address = json['custom_fields']['address']['view'];
     } catch (e) {
@@ -97,6 +102,9 @@ class User extends Model {
     if (this.eProviders != null) {
       data['e_providers'] = this.eProviders.map((v) => v).toList();
     }
+
+    data['otp_code'] = this.otpCode;
+
     return data;
   }
 
