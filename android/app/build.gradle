@@ -35,7 +35,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    namespace "com.gen21.on_demand_service_partner"
+    namespace "com.gen21.on_demand_service_partner_bd"
     compileSdkVersion 35
     ndkVersion "26.1.10909125"
 
@@ -57,7 +57,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.gen21.on_demand_service_partner"
+        applicationId "com.gen21.on_demand_service_partner_bd"
         minSdkVersion 22
         targetSdkVersion 35
         multiDexEnabled true

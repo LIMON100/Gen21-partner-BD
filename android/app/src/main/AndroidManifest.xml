@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gen21.on_demand_service_partner">
+    package="com.gen21.on_demand_service_partner_bd">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -13,18 +13,10 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 
-    <!-- io.flutter.app.FlutterApplication is an android.app.Application that
-         calls FlutterMain.startInitialization(this); in its onCreate method.
-         In most cases you can leave this as-is, but you if you want to provide
-         additional functionality it is fine to subclass or reimplement
-         FlutterApplication and put your custom class here. -->
-<!--    android:name="io.flutter.app.FlutterApplication"-->
     <application
-            android:label="Gen21-Partner-BD"
-            android:icon="@mipmap/ic_launcher"
+            android:label="Gen21-Partner"
+            android:icon="@mipmap/launcher_icon"
             android:usesCleartextTraffic="true">
-
-
 
         <meta-data android:name="com.google.android.geo.API_KEY"
                    android:value="AIzaSyCNfa5by9DBTfPcLdLe8vnNOlZ7pBJrN3Q"/>

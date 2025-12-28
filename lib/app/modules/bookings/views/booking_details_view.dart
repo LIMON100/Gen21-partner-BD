@@ -571,8 +571,6 @@ class BookingDetailsView extends GetView<BookingControllerNew> {
                         child: AutoSizeText(_booking.value.address?.address ?? '', maxLines: 2, overflow: TextOverflow.ellipsis, style: Get.textTheme.bodyText1),
                       ),
                     ],
-                    // spacing: 8,
-                    // crossAxisAlignment: WrapCrossAlignment.center,
                   ),
                 ],
               ),

@@ -12,6 +12,8 @@ import '../../../repositories/user_repository.dart';
 import '../../../routes/app_routes.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/firebase_messaging_service.dart';
+import '../../global_widgets/block_button_widget.dart';
+import '../../global_widgets/text_field_widget.dart';
 import '../../root/controllers/root_controller.dart';
 
 class AuthController extends GetxController {
@@ -26,6 +28,7 @@ class AuthController extends GetxController {
 
   // final phoneVerificationOnProgress = false.obs;
   final phoneOtpSendingStatus = "".obs;
+  final otpCode = ''.obs;
 
   // final isTimeOut = false.obs;
 
@@ -56,28 +59,156 @@ class AuthController extends GetxController {
         "sjdnfjksa 2 in AuthController() phoneNumber: ${Get.find<AuthService>().user.value.phoneNumber} countryCode ${Get.find<AuthService>().user.value.countryCode}");
   }
 
+  // void login() async {
+  //   Get.focusScope.unfocus();
+  //   if (loginFormKey.currentState.validate()) {
+  //     loginFormKey.currentState.save();
+  //     loading.value = true;
+  //     try {
+  //       User tempUser ;
+  //       await Get.find<FireBaseMessagingService>().setDeviceToken();
+  //       tempUser = await _userRepository.login(currentUser.value);
+  //
+  //       printWrapped("gen_log tempUser.value.eProviders.lenght ${tempUser.eProviders.length}");
+  //       if(tempUser.eProviders.isEmpty){
+  //         await Get.offAllNamed(Routes.updateProviderInfo,
+  //             arguments: {"user":tempUser, "api_key":"${tempUser.apiToken}"});
+  //       }else{
+  //         try {
+  //           currentUser.value = tempUser;
+  //           await _userRepository.signInWithEmailAndPassword(
+  //               currentUser.value.email, currentUser.value.apiToken);
+  //         }catch(e){}
+  //         final prefs = await SharedPreferences.getInstance();
+  //         final bool hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
+  //
+  //         if (hasSeenOnboarding) {
+  //           await Get.offAllNamed(Routes.ROOT, arguments: 0);
+  //         } else {
+  //           await Get.offAllNamed(Routes.ONBOARDING);
+  //         }
+  //       }
+  //       loading.value = false;
+  //
+  //     } catch (e) {
+  //       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
+  //     } finally {
+  //       loading.value = false;
+  //     }
+  //   }
+  // }
+
+
+  // -- STEP 1: Modify the existing login() method --
   void login() async {
     Get.focusScope.unfocus();
     if (loginFormKey.currentState.validate()) {
       loginFormKey.currentState.save();
       loading.value = true;
       try {
-        User tempUser ;
+        // Step 1: Set the device token
         await Get.find<FireBaseMessagingService>().setDeviceToken();
-        tempUser = await _userRepository.login(currentUser.value);
 
-        // await Get.toNamed(Routes.ROOT, arguments: 0);
-        // await Get.offAllNamed(Routes.ROOT, arguments: 0);
-        printWrapped("gen_log tempUser.value.eProviders.lenght ${tempUser.eProviders.length}");
-        if(tempUser.eProviders.isEmpty){
+        // Step 2: Call the backend to get user data.
+        // The backend should return the user details including the 'otp_code'.
+        User tempUser = await _userRepository.login(currentUser.value);
+
+        // Step 3: If the user is found, show the OTP dialog.
+        // We pass the fetched user object to the dialog handler.
+        _showOtpDialog(tempUser);
+
+      } catch (e) {
+        Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
+      } finally {
+        loading.value = false;
+      }
+    }
+  }
+
+  void _showOtpDialog(User fetchedUser) {
+    Get.dialog(
+      AlertDialog(
+        // Optional: Add some padding to the title for better spacing
+        title: Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Text("Enter OTP".tr, textAlign: TextAlign.center),
+        ),
+        // --- SIZE CONTROL STARTS HERE ---
+        content: Container(
+          // Set a width to constrain the dialog. Adjust as needed.
+          width: Get.width * 0.8, // 80% of screen width
+          child: Column(
+            mainAxisSize: MainAxisSize.min, // Makes the column shrink to fit children
+            children: [
+              Text(
+                "An OTP has been sent to your registered number.".tr,
+                textAlign: TextAlign.center,
+                style: Get.textTheme.caption,
+              ),
+              SizedBox(height: 20),
+              TextFieldWidget(
+                labelText: "OTP Code".tr,
+                hintText: "- - - - - -".tr,
+                style: Get.textTheme.headline4.merge(TextStyle(letterSpacing: 8)),
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.number,
+                onChanged: (input) => otpCode.value = input,
+              ),
+            ],
+          ),
+        ),
+        // --- END SIZE CONTROL ---
+        actions: [
+          TextButton(
+            onPressed: () => Get.back(),
+            child: Text("Cancel".tr),
+          ),
+          // Using an ElevatedButton for a more prominent "Submit" action
+          ElevatedButton(
+            onPressed: () {
+              if (otpCode.value.isNotEmpty) {
+                Get.back(); // Close the dialog first
+                // Proceed to verify the OTP with the fetched user data
+                verifyLoginOtpAndProceed(fetchedUser, otpCode.value);
+              } else {
+                Get.showSnackbar(Ui.ErrorSnackBar(message: "Please enter the OTP".tr));
+              }
+            },
+            child: Text("Submit".tr),
+          ),
+        ],
+        // Adjust padding for a tighter look
+        contentPadding: EdgeInsets.fromLTRB(24, 10, 24, 10),
+        actionsPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+      ),
+      barrierDismissible: false,
+    );
+  }
+
+// -- STEP 3: Create the final login logic that verifies the OTP --
+  void verifyLoginOtpAndProceed(User fetchedUser, String enteredOtp) async {
+    loading.value = true;
+    try {
+      print("Backend OTP: ${fetchedUser.otpCode}, User Entered OTP: $enteredOtp");
+
+      // Step 1: Match the OTP from the backend response with the user's input
+      if (fetchedUser.otpCode == enteredOtp) {
+        print("OTP Matched successfully!");
+
+        // --- This is the rest of your ORIGINAL login logic ---
+        if (fetchedUser.eProviders.isEmpty) {
           await Get.offAllNamed(Routes.updateProviderInfo,
-              arguments: {"user":tempUser, "api_key":"${tempUser.apiToken}"});
-        }else{
+              arguments: {"user": fetchedUser, "api_key": "${fetchedUser.apiToken}"});
+        } else {
           try {
-            currentUser.value = tempUser;
+            currentUser.value = fetchedUser;
             await _userRepository.signInWithEmailAndPassword(
                 currentUser.value.email, currentUser.value.apiToken);
-          }catch(e){}
+          } catch (e) {}
+
           final prefs = await SharedPreferences.getInstance();
           final bool hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
 
@@ -86,15 +217,17 @@ class AuthController extends GetxController {
           } else {
             await Get.offAllNamed(Routes.ONBOARDING);
           }
-          // await Get.offAllNamed(Routes.ROOT, arguments: 0);
         }
-        loading.value = false;
+        // --- End of original logic ---
 
-      } catch (e) {
-        Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
-      } finally {
-        loading.value = false;
+      } else {
+        // If OTP does not match
+        throw Exception("The OTP you entered is incorrect.".tr);
       }
+    } catch (e) {
+      Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
+    } finally {
+      loading.value = false;
     }
   }
 
