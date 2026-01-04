@@ -84,7 +84,7 @@ class ServiceRequestsView extends GetWidget<RequestController> {
                                             ),
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [Text("Discount: "), controller.orderRequestResponse.value.couponData.discountType.toString() == "percent" ? Text("${controller.orderRequestResponse.value.couponData.discount}%") : Text("\$${controller.orderRequestResponse.value.couponData.discount}")],
+                                              children: [Text("Discount: "), controller.orderRequestResponse.value.couponData.discountType.toString() == "percent" ? Text("${controller.orderRequestResponse.value.couponData.discount}%") : Text("\৳${controller.orderRequestResponse.value.couponData.discount}")],
                                             ),
                                           ],
                                         ),
@@ -118,11 +118,4 @@ class ServiceRequestsView extends GetWidget<RequestController> {
 
         }));
   }
-
-// @override
-// void dispose() {
-//   controller.closeRingTone();
-//   super.dispose();
-// }
-
 }
