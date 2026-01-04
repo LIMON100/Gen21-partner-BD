@@ -325,7 +325,7 @@ class BookingsListItemWidgetNew extends StatelessWidget {
                           SizedBox(
                             width: 5,
                           ),
-                          Text(_booking.tips.toDouble().toString()+"\$",style: Get.textTheme.headline6.merge(TextStyle(color: _color))),
+                          Text(_booking.tips.toDouble().toString()+"\৳",style: Get.textTheme.headline6.merge(TextStyle(color: _color))),
                         ],
                       )),
                 ],

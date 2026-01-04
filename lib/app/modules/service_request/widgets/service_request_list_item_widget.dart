@@ -181,9 +181,9 @@ class ServiceRequestListItemWidget extends StatelessWidget {
                               fontSize: 14,
                             )),
                         SizedBox(width: 5),
-                        if (_orderRequestPush.couponData != null) Text("\$${int.parse(_service.quantity) * (double.parse(_service.price))}", style: TextStyle(color: Colors.grey, fontSize: 14, decoration: TextDecoration.lineThrough), maxLines: 4, overflow: TextOverflow.ellipsis, textDirection: TextDirection.rtl, textAlign: TextAlign.justify),
+                        if (_orderRequestPush.couponData != null) Text("\৳${int.parse(_service.quantity) * (double.parse(_service.price))}", style: TextStyle(color: Colors.grey, fontSize: 14, decoration: TextDecoration.lineThrough), maxLines: 4, overflow: TextOverflow.ellipsis, textDirection: TextDirection.rtl, textAlign: TextAlign.justify),
                         SizedBox(width: 5),
-                        Text("\$$payableAmount", style: TextStyle(color: Get.theme.colorScheme.secondary, fontSize: 14), maxLines: 4, overflow: TextOverflow.ellipsis, textDirection: TextDirection.rtl, textAlign: TextAlign.justify),
+                        Text("\৳$payableAmount", style: TextStyle(color: Get.theme.colorScheme.secondary, fontSize: 14), maxLines: 4, overflow: TextOverflow.ellipsis, textDirection: TextDirection.rtl, textAlign: TextAlign.justify),
                       ],
                     ),
                     SizedBox(
