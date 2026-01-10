@@ -12,7 +12,7 @@ class CombinedPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Help & Faq2'),
+          title: Text('Help & Faq'),
           centerTitle: true,
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios, color: Get.theme.hintColor),
