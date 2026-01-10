@@ -4,7 +4,7 @@
     "app_name": "Gen21",
     "enable_stripe": "1",
     "default_tax": "10",
-    "default_currency": "$",
+    "default_currency": "৳",
     "fcm_key": "AAAAn1M4PgE:APA91bFpnDYezVUYNtL8QEyREVQxfb2CQbSQsYQnG_HrxfMO-Ddp3XaSLRoSsj9Rmg9OxsMx03oclwfkVbM77D799TmNWaz6bAg26fYloADuaP1XaqKY_wmhf3DPxTP10axDotgWTsg5",
     "enable_paypal": "1",
     "main_color": "#F4841F",
